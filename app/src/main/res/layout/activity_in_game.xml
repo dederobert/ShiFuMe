@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_pierre"
+        android:layout_width="119dp"
+        android:layout_height="107dp"
+        android:text="Pierre"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <Button
+        android:id="@+id/btn_feuille"
+        android:layout_width="113dp"
+        android:layout_height="109dp"
+        android:text="Feuille"
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="405dp" />
+
+    <Button
+        android:id="@+id/btn_ciseaux"
+        android:layout_width="117dp"
+        android:layout_height="107dp"
+        android:text="Ciseaux"
+        tools:layout_editor_absoluteX="254dp"
+        tools:layout_editor_absoluteY="405dp" />
+</android.support.constraint.ConstraintLayout>
