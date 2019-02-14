@@ -29,7 +29,7 @@ public class Server extends Common {
         try {
             serverSocket = new ServerSocket(8888);
             clients.add(serverSocket.accept());
-            new PrintWriter(clients.get(0).getOutputStream()).print("Bonjour client");
+            clients.get(0).getOutputStream().write(("Bonjour client"+'\0').getBytes());
             clients.get(0).getInputStream().read(bytes);
             Log.d("Serveur", new String(bytes));
         } catch (IOException e) {

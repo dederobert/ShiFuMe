@@ -28,7 +28,7 @@ public class Client extends Common {
             socket.connect(new InetSocketAddress(getOwnerAddress(), 8888));
             socket.getInputStream().read(bytes);
             Log.d("Client", new String(bytes));
-            new PrintWriter(socket.getOutputStream()).print("Bonjour serveur");
+            socket.getOutputStream().write(("Bonjour serveur"+'\0').getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
