@@ -1,6 +1,7 @@
 package fr.m2ihm.a1819.shi_fu_me.p2p;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,13 +14,28 @@ public class Client extends Common {
 
     Socket socket;
     byte[] bytes = new byte[1024];
+    private InetAddress ownerAddress;
 
-    public Client(Context context, InetAddress groupOwnerAddress) throws IOException {
-        super(context, groupOwnerAddress);
-        socket = new Socket();
+    public Client(Context context, InetAddress groupOwnerAddress) {
+        super(context);
+        this.ownerAddress = groupOwnerAddress;
         Toast.makeText(context, "Je suis le client", Toast.LENGTH_LONG).show();
-        socket.connect(new InetSocketAddress(getOwnerAddress(), getPort()));
-        socket.getInputStream().read(bytes);
+    }
+
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        try {
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(getOwnerAddress(), 8888));
+            socket.getInputStream().read(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Log.d("Client", new String(bytes));
+        return null;
+    }
+
+    public InetAddress getOwnerAddress() {
+        return ownerAddress;
     }
 }

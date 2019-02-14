@@ -1,10 +1,10 @@
 package fr.m2ihm.a1819.shi_fu_me.p2p;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -16,12 +16,21 @@ public class Server extends Common {
     ServerSocket serverSocket;
     List<Socket> clients = new ArrayList<>();
 
-    public Server(final Context context, InetAddress groupOwnerAddress) throws IOException {
-        super(context, groupOwnerAddress);
-        serverSocket = new ServerSocket(getPort());
+    public Server(Context context) {
+        super(context);
         Toast.makeText(context, "Je suis le serveur", Toast.LENGTH_LONG).show();
-        clients.add(serverSocket.accept());
-        clients.get(0).getOutputStream().write("Bonjour client".getBytes());
     }
 
+
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        try {
+            serverSocket = new ServerSocket(8888);
+            clients.add(serverSocket.accept());
+            clients.get(0).getOutputStream().write("Bonjour client".getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
