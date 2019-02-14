@@ -8,6 +8,7 @@ import java.net.InetAddress;
 public abstract class Common extends AsyncTask{
 
     private Context context;
+    protected byte[] bytes = new byte[1024];
 
     public Common(Context context) {
         this.context = context;
