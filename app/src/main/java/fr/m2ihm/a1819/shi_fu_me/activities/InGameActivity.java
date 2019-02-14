@@ -1,24 +1,19 @@
 package fr.m2ihm.a1819.shi_fu_me.activities;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.wifi.p2p.WifiP2pManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.net.InetAddress;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fr.m2ihm.a1819.shi_fu_me.R;
-import fr.m2ihm.a1819.shi_fu_me.p2p.Client;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Common;
 import fr.m2ihm.a1819.shi_fu_me.p2p.WiFiDirectBroadcastReceiver;
 import fr.m2ihm.a1819.shi_fu_me.utils.Choice;

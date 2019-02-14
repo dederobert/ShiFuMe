@@ -7,9 +7,11 @@ import java.net.InetAddress;
 public abstract class Common {
     private final Context context;
     private InetAddress ownerAddress;
+    private final int port = 8888;
 
-    public Common(Context context) {
+    public Common(Context context, InetAddress groupOwnerAddress) {
         this.context = context;
+        this.setOwnerAddress(groupOwnerAddress);
     }
 
     public void setOwnerAddress(InetAddress ownerAddress) {
@@ -18,5 +20,9 @@ public abstract class Common {
 
     public InetAddress getOwnerAddress() {
         return ownerAddress;
+    }
+
+    public int getPort() {
+        return port;
     }
 }

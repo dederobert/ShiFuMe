@@ -150,20 +150,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
-        <Button
-            android:id="@+id/btn_feuille"
-            android:layout_width="113dp"
-            android:layout_height="109dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/feuille"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_ciseaux"
-            app:layout_constraintStart_toEndOf="@+id/btn_pierre"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
+        <ImageButton
             android:id="@+id/btn_pierre"
             android:layout_width="119dp"
             android:layout_height="107dp"
@@ -171,13 +158,30 @@
             android:layout_marginEnd="3dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="@string/pierre"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_feuille"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/fist_bw"
+            android:padding="20dp"
+            android:scaleType="fitCenter"/>
 
-        <Button
+        <ImageButton
+            android:id="@+id/btn_feuille"
+            android:layout_width="113dp"
+            android:layout_height="109dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_ciseaux"
+            app:layout_constraintStart_toEndOf="@+id/btn_pierre"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/hand_bw"
+            android:padding="20dp"
+            android:scaleType="fitCenter"/>
+
+        <ImageButton
             android:id="@+id/btn_ciseaux"
             android:layout_width="117dp"
             android:layout_height="107dp"
@@ -185,11 +189,15 @@
             android:layout_marginEnd="13dp"
             android:layout_marginStart="3dp"
             android:layout_marginTop="8dp"
-            android:text="@string/ciseaux"
+            app:srcCompat="@drawable/victory_bw"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_feuille"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="20dp"
+            android:scaleType="fitCenter"/>
+
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>
