@@ -20,11 +20,15 @@ public class ConnectionListener implements WifiP2pManager.ConnectionInfoListener
     @Override
     public void onConnectionInfoAvailable(WifiP2pInfo info) {
 
-        if (info.groupFormed && !info.isGroupOwner) {
-                inGameActivity.setClientServer(new Client(inGameActivity, info.groupOwnerAddress));
-        }else{
-                inGameActivity.setClientServer(new Server(inGameActivity));
+        if (info.groupFormed) {//Si il s'agit d'une connection
+            if (!info.isGroupOwner) { //Si on est le client
+                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, false));
+            } else { //Si on est le serveur
+                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, true));
+                inGameActivity.setServer(new Server(inGameActivity));
+                inGameActivity.getServer().start();
+            }
+            inGameActivity.getClient().start();
         }
-        inGameActivity.getClientServer().execute();
     }
 }
