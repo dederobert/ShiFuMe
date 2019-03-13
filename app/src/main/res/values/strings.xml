@@ -3,4 +3,8 @@
     <string name="pierre">Pierre</string>
     <string name="feuille">Feuille</string>
     <string name="ciseaux">Ciseaux</string>
+    <string name="choix_adversaire">Choix adversaire</string>
+    <string name="jeu_solo">Jeu solo</string>
+    <string name="jeu_multijoueur">Jeu multijoueur</string>
+    <string name="quitter">Quitter</string>
 </resources>

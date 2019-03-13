@@ -1,4 +1,4 @@
-package fr.m2ihm.a1819.shi_fu_me.utils;
+package fr.m2ihm.a1819.shi_fu_me.utils.drawer;
 
 /**
  * Représente une resource qui pourra être utilisé par un objet de type {@link Drawer} afin d'être rendue

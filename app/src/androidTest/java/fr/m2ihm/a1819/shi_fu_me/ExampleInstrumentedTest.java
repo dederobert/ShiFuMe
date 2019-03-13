@@ -23,9 +23,4 @@ public class ExampleInstrumentedTest {
 
         assertEquals("fr.m2ihm.a1819.shi_fu_me", appContext.getPackageName());
     }
-
-    @Test
-    public void updateImage() {
-
-    }
 }

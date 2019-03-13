@@ -1,6 +1,11 @@
 package fr.m2ihm.a1819.shi_fu_me.models;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import fr.m2ihm.a1819.shi_fu_me.activities.InGameActivity;
+import fr.m2ihm.a1819.shi_fu_me.p2p.Client;
+import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
 
 /**
  * Représente les données d'une parties
@@ -12,6 +17,10 @@ public class Game {
         SINGLE_PLAYER,
         MULTI_PLAYER
     }
+
+
+    @NonNull
+    private final InGameActivity inGameActivity;
 
     /**
      * Choix de l'utilisateur
@@ -35,10 +44,17 @@ public class Game {
      */
     private int advScore = 0;
 
+
+    private @Nullable Server server;
+    private @Nullable Client client;
+
     /**
      * Créer un jeu
+     * @param inGameActivity Activité
      */
-    public Game() {}
+    public Game(@NonNull InGameActivity inGameActivity) {
+        this.inGameActivity = inGameActivity;
+    }
 
     /**
      * Met à jours les score en fonction des choix
@@ -48,6 +64,11 @@ public class Game {
             this.playerScore++;
         else if(this.advChoice.win(this.playerChoice))
             this.advScore++;
+    }
+
+    public void resetScore() {
+        this.playerScore = 0;
+        this.advScore = 0;
     }
 
     /**
@@ -63,6 +84,8 @@ public class Game {
      * @param playerChoice Choix du joueur
      */
     public void setPlayerChoice(@NonNull Choice playerChoice) {
+        if (client != null)
+            client.setOwnChoice(playerChoice);
         this.playerChoice = playerChoice;
     }
 
@@ -98,9 +121,25 @@ public class Game {
         return advScore;
     }
 
+    @Nullable
+    public Client getClient() {
+        return client;
+    }
 
-    public void resetScore() {
-        this.playerScore = 0;
-        this.advScore = 0;
+    public void setClient(@NonNull Client client) {
+        this.client = client;
+    }
+
+    @Nullable
+    public Server getServer() {
+        return server;
+    }
+
+    public void setServer(@NonNull Server server) {
+        this.server = server;
+    }
+
+    public @NonNull InGameActivity getInGameActivity() {
+        return inGameActivity;
     }
 }

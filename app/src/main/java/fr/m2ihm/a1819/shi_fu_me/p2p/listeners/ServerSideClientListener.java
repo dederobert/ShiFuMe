@@ -3,6 +3,7 @@ package fr.m2ihm.a1819.shi_fu_me.p2p.listeners;
 import fr.m2ihm.a1819.shi_fu_me.models.Choice;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
 import fr.m2ihm.a1819.shi_fu_me.p2p.ServerSideClient;
+import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.callbacks.ServerSideClientCallBack;
 
 public final class ServerSideClientListener implements ServerSideClientCallBack {
 
@@ -13,7 +14,7 @@ public final class ServerSideClientListener implements ServerSideClientCallBack 
     }
 
     @Override
-    public void onReceivePlayerChoice(Choice choice, boolean runningOnServerSide, int clientIndex) {
+    public void onReceivePlayerChoice(Choice choice, int clientIndex) {
        //Set the choice on server
         server.setChoice(choice, clientIndex);
 

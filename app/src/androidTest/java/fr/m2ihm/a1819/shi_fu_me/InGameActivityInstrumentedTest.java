@@ -16,7 +16,7 @@ import fr.m2ihm.a1819.shi_fu_me.activities.InGameActivity;
 public class InGameActivityInstrumentedTest  {
 
     @Rule
-    public ActivityTestRule<InGameActivity> activityTestRule = new ActivityTestRule<>(InGameActivity.class, true, true);
+    public final ActivityTestRule<InGameActivity> activityTestRule = new ActivityTestRule<>(InGameActivity.class, true, true);
 
     @Test
     public void scoreInitial0()  {

@@ -10,7 +10,7 @@ import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
 
 public final class ConnectionListener implements WifiP2pManager.ConnectionInfoListener {
 
-    private InGameActivity inGameActivity;
+    private final InGameActivity inGameActivity;
 
     public ConnectionListener(InGameActivity inGameActivity) {
         this.inGameActivity = inGameActivity;
@@ -22,13 +22,17 @@ public final class ConnectionListener implements WifiP2pManager.ConnectionInfoLi
 
         if (info.groupFormed) {//Si il s'agit d'une connection
             if (!info.isGroupOwner) { //Si on est le client
-                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, false, new ClientListener(this.inGameActivity.getGame())));
+                inGameActivity.getGame().setClient(new Client(inGameActivity, info.groupOwnerAddress, new ClientListener(this.inGameActivity.getGame()), inGameActivity.getGame()));
             } else { //Si on est le serveur
-                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, true, new ClientListener(this.inGameActivity.getGame())));
-                inGameActivity.setServer(new Server(inGameActivity));
-                inGameActivity.getServer().start();
+                inGameActivity.getGame().setClient(new Client(inGameActivity, info.groupOwnerAddress, new ClientListener(this.inGameActivity.getGame()), inGameActivity.getGame()));
+                inGameActivity.getGame().setServer(new Server(inGameActivity, inGameActivity.getGame()));
+                if (inGameActivity.getGame().getServer() != null) {
+                    inGameActivity.getGame().getServer().start();
+                }
             }
-            inGameActivity.getClient().start();
+            if (inGameActivity.getGame().getClient() != null) {
+                inGameActivity.getGame().getClient().start();
+            }
         }
     }
 }

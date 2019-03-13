@@ -6,9 +6,9 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 import android.widget.Toast;
 
-public final class PeersListener implements WifiP2pManager.PeerListListener {
+final class PeersListener implements WifiP2pManager.PeerListListener {
 
-    private Context context;
+    private final Context context;
 
     public PeersListener(Context context) {
         this.context = context;

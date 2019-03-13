@@ -8,23 +8,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Semaphore;
 
 import fr.m2ihm.a1819.shi_fu_me.models.Choice;
-import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.ServerSideClientCallBack;
+import fr.m2ihm.a1819.shi_fu_me.models.Game;
+import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.callbacks.ServerSideClientCallBack;
 
 public class ServerSideClient extends Common {
 
-    @NonNull
     private final int index;
     @NonNull
     private final Socket socket;
     @NonNull
     private final ServerSideClientCallBack serverSideClientCallBack;
     private boolean running = true;
-    private boolean runningOnServerSide = false;
 
 
     @NonNull
@@ -35,8 +31,8 @@ public class ServerSideClient extends Common {
     private final Object lockOppChoice = new Object();
     private final Object lockOwnChoice = new Object();
 
-    ServerSideClient(int index, @NonNull Context context, @NonNull Socket socket, @NonNull ServerSideClientCallBack serverSideClientCallBack) {
-        super(context);
+    ServerSideClient(int index, @NonNull Context context, @NonNull Socket socket, @NonNull ServerSideClientCallBack serverSideClientCallBack, Game game) {
+        super(context, game);
         this.index = index;
         this.socket = socket;
         this.serverSideClientCallBack = serverSideClientCallBack;
@@ -50,21 +46,13 @@ public class ServerSideClient extends Common {
             this.setBufferedReader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
 
             String response;
-
-            //CHECK SI LE CLIENT EST SERVER SIDE OU NON
-            response = this.getBufferedReader().readLine();
-            if (MessageHeader.HELLO_CLIENTSIDE.checkResponse(response))
-                runningOnServerSide = false;
-            else if (MessageHeader.HELLO_SERVERSIDE.checkResponse(response))
-                runningOnServerSide = true;
-
             do {
                 response = this.getBufferedReader().readLine(); //On recoit le choix du client
 
                 if (MessageHeader.END.checkResponse(response)) { running = false; continue; } //Check si on recoit fin de connection
                 if (MessageHeader.SND_PLAYER_CHOICE.checkResponse(response)) {
                     ownChoice = Choice.valueOf(MessageHeader.SND_PLAYER_CHOICE.extractInfo(response));
-                    serverSideClientCallBack.onReceivePlayerChoice(ownChoice, runningOnServerSide, getIndex());
+                    serverSideClientCallBack.onReceivePlayerChoice(ownChoice, getIndex());
                 }
 
                 synchronized (lockOppChoice) {
@@ -95,6 +83,7 @@ public class ServerSideClient extends Common {
         return ownChoice;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void setOwnChoice(@NonNull Choice ownChoice) {
         synchronized (lockOwnChoice) {
             this.ownChoice = ownChoice;
@@ -103,6 +92,7 @@ public class ServerSideClient extends Common {
     }
 
     @NonNull
+    @SuppressWarnings("WeakerAccess")
     public Choice getOpponentChoice() {
         return opponentChoice;
     }
@@ -114,7 +104,7 @@ public class ServerSideClient extends Common {
         }
     }
 
-
+    @SuppressWarnings("WeakerAccess")
     public int getIndex() {
         return index;
     }

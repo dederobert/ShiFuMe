@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.m2ihm.a1819.shi_fu_me.models.Choice;
-import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.ServerSideClientCallBack;
+import fr.m2ihm.a1819.shi_fu_me.models.Game;
+import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.callbacks.ServerSideClientCallBack;
 import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.ServerSideClientListener;
 
 /**
@@ -22,11 +23,11 @@ public class Server extends Common {
     /**
      * List des sockets clients
      */
-    private List<ServerSideClient> clients = new ArrayList<>();
-    private ServerSideClientCallBack serverSideClientCallBack;
+    private final List<ServerSideClient> clients = new ArrayList<>();
+    private final ServerSideClientCallBack serverSideClientCallBack;
 
-    private List<Choice> choices = new ArrayList<>();
-    private List<Object> locks = new ArrayList<>();
+    private final List<Choice> choices = new ArrayList<>();
+    private final List<Object> locks = new ArrayList<>();
 
     private void resetChoice() {
         for(Choice choice: choices)
@@ -36,9 +37,10 @@ public class Server extends Common {
     /**
      * Créer un serveur
      * @param context Le context de l'application
+     * @param game
      */
-    public Server(Context context) {
-        super(context);
+    public Server(Context context, Game game) {
+        super(context, game);
                 
         this.serverSideClientCallBack = new ServerSideClientListener(this);
         Toast.makeText(context, "Je suis le serveur", Toast.LENGTH_LONG).show();
@@ -51,7 +53,7 @@ public class Server extends Common {
             Log.d("[Server]", "Création serveur");
             ServerSocket serverSocket = new ServerSocket(8888);
             int i = 0;
-            while (clients.add(new ServerSideClient(i, getContext(), serverSocket.accept(), serverSideClientCallBack))) {
+            while (clients.add(new ServerSideClient(i, getContext(), serverSocket.accept(), serverSideClientCallBack, getGame()))) {
                 Log.d("[Server]", "Client connecté");
                 choices.add(Choice.UNSET);
                 locks.add(new Object());

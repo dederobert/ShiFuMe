@@ -2,8 +2,8 @@ package fr.m2ihm.a1819.shi_fu_me.models;
 import android.support.annotation.NonNull;
 
 import fr.m2ihm.a1819.shi_fu_me.R;
-import fr.m2ihm.a1819.shi_fu_me.utils.AndroidDrawableResource;
-import fr.m2ihm.a1819.shi_fu_me.utils.DrawableResource;
+import fr.m2ihm.a1819.shi_fu_me.utils.drawer.AndroidDrawableResource;
+import fr.m2ihm.a1819.shi_fu_me.utils.drawer.DrawableResource;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public enum Choice {
     /**
      * Objet permetant de gérer l'aléatoir
      */
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * Effectue un choix aléatoir parmis les différents choix possible
@@ -39,7 +39,7 @@ public enum Choice {
      * L"identifiant du drawable utilisé pour représenter le choix
      */
 
-    private DrawableResource ressource;
+    private final DrawableResource ressource;
 
     /**
      * Constructeur d'un choix

@@ -12,24 +12,23 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.concurrent.Semaphore;
 
 import fr.m2ihm.a1819.shi_fu_me.models.Choice;
-import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.ClientCallBack;
+import fr.m2ihm.a1819.shi_fu_me.models.Game;
+import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.callbacks.ClientCallBack;
 
 /**
  * Classe utilisé par le client
  */
 public class Client extends Common {
 
-    private final boolean runningOnServerSide;
     @NonNull
-    private ClientCallBack clientCallBack;
+    private final ClientCallBack clientCallBack;
     /**
      * Addresse du serveur
      */
     @NonNull
-    private InetAddress ownerAddress;
+    private final InetAddress ownerAddress;
     private boolean running = true;
     @NonNull
     private Choice ownChoice = Choice.UNSET;
@@ -43,12 +42,11 @@ public class Client extends Common {
      * Créer le client
      * @param context Le context de l'application
      * @param groupOwnerAddress L'addresse du serveur
-     * @param runningOnServerSide Vraie si le client est lancé côté server
+     * @param game
      */
-    public Client(@NonNull Context context, @NonNull InetAddress groupOwnerAddress, boolean runningOnServerSide, @NonNull ClientCallBack clientCallBack) {
-        super(context);
+    public Client(@NonNull Context context, @NonNull InetAddress groupOwnerAddress, @NonNull ClientCallBack clientCallBack, Game game) {
+        super(context, game);
         this.ownerAddress = groupOwnerAddress;
-        this.runningOnServerSide = runningOnServerSide;
         this.clientCallBack = clientCallBack;
         Toast.makeText(context, "Je suis le client", Toast.LENGTH_LONG).show();
     }
@@ -63,14 +61,6 @@ public class Client extends Common {
             this.setPrintWriter(new PrintWriter(socket.getOutputStream(), true));
             this.setBufferedReader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
             Log.d("[Client]", "Connecté !");
-
-
-            Log.d("[Client]", "Envoie message!");
-            //Write Hello
-            if (runningOnServerSide)
-                this.getPrintWriter().println(MessageHeader.HELLO_SERVERSIDE);
-            else
-                this.getPrintWriter().println(MessageHeader.HELLO_CLIENTSIDE);
 
             while (running) {
                 synchronized (lockOwnChoice) {
@@ -104,6 +94,7 @@ public class Client extends Common {
     }
 
     @NonNull
+    @SuppressWarnings("WeakerAccess")
     public Choice getOwnChoice() {
         return ownChoice;
     }
@@ -114,6 +105,7 @@ public class Client extends Common {
      * La fonction gère l'accès concurentiel
      * @param ownChoice Le choix de l'utilisateur
      */
+    @SuppressWarnings("WeakerAccess")
     public void  setOwnChoice(@NonNull Choice ownChoice) {
         synchronized (lockOwnChoice) {
             this.ownChoice = ownChoice;
@@ -121,8 +113,8 @@ public class Client extends Common {
         }
     }
 
-    @NonNull
-    public Choice getOpponentChoice() {
+    @SuppressWarnings("WeakerAccess")
+    public @NonNull Choice getOpponentChoice() {
         return opponentChoice;
     }
 
@@ -132,6 +124,7 @@ public class Client extends Common {
      * La fonction gère l'accès concurentiel
      * @param opponentChoice Choix de l'opposant
      */
+    @SuppressWarnings("WeakerAccess")
     public void setOpponentChoice(@NonNull Choice opponentChoice) {
         synchronized (lockOppChoice) {
             this.opponentChoice = opponentChoice;

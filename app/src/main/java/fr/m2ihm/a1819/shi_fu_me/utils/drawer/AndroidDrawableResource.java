@@ -1,4 +1,4 @@
-package fr.m2ihm.a1819.shi_fu_me.utils;
+package fr.m2ihm.a1819.shi_fu_me.utils.drawer;
 
 /**
  * Classe représentant des ressource drawable d'android utilisé pour être rendue par un {@link Drawer}

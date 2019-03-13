@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import java.io.BufferedReader;
 import java.io.PrintWriter;
 
+import fr.m2ihm.a1819.shi_fu_me.models.Game;
+
 /**
  * Classe commune au client et serveur
  */
@@ -27,18 +29,21 @@ public abstract class Common extends Thread{
         this.bufferedReader = bufferedReader;
     }
 
-    public void notifyChange() {}
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
 
     public enum MessageHeader {
-        HELLO_CLIENTSIDE("hello_clt"),
-        HELLO_SERVERSIDE("hello_srv"),
         SND_PLAYER_CHOICE("snd_choice"), //choice [choice: CHOIX]
         RCV_PLAYER_CHOICE("rcv_choice"),
-        INFOS("info"), //info [opp_choice: CHOIX, your_score: SCORE, opp_score: SCORE]
         END("end");
 
         @NonNull
-        private String message;
+        private final String message;
         MessageHeader(@NonNull String message) {
             this.message = message;
         }
@@ -49,12 +54,12 @@ public abstract class Common extends Thread{
             return this.message;
         }
 
-        public boolean checkResponse(@NonNull String response) {
+        boolean checkResponse(@NonNull String response) {
             return (message.startsWith(response));
         }
 
         @NonNull
-        public String extractInfo(@NonNull String response) {
+        String extractInfo(@NonNull String response) {
             return response.replace(message+":", "");
         }
     }
@@ -64,6 +69,7 @@ public abstract class Common extends Thread{
      */
     @NonNull
     private final Context context;
+    private Game game;
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
 
@@ -71,9 +77,11 @@ public abstract class Common extends Thread{
     /**
      * Constructeur de la classe
      * @param context Le context de l'application
+     * @param game
      */
-    Common(@NonNull final Context context) {
+    Common(@NonNull final Context context, Game game) {
         this.context = context;
+        this.game = game;
     }
 
     /**
@@ -81,6 +89,7 @@ public abstract class Common extends Thread{
      * @return Le context de l'application
      */
     @NonNull
+    @SuppressWarnings("WeakerAccess")
     public Context getContext() {
         return context;
     }

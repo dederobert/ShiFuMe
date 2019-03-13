@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import fr.m2ihm.a1819.shi_fu_me.models.Game;
-import fr.m2ihm.a1819.shi_fu_me.utils.Opponent;
-import fr.m2ihm.a1819.shi_fu_me.utils.OpponentFactory;
+import fr.m2ihm.a1819.shi_fu_me.utils.opponent.Opponent;
+import fr.m2ihm.a1819.shi_fu_me.utils.opponent.OpponentFactory;
 
 public class OpponentUnitTest {
     private Opponent playerOpponent;
