@@ -25,8 +25,7 @@ public class Server extends Common {
      * List des sockets clients
      */
     private List<ServerSideClient> clients = new ArrayList<>();
-    private Choice choicePlayer2;
-    private Choice choicePlayer1;
+
 
 
 
@@ -55,19 +54,4 @@ public class Server extends Common {
         }
     }
 
-    public Choice getChoicePlayer1() {
-        return choicePlayer1;
-    }
-
-    public Choice getChoicePlayer2() {
-        return choicePlayer2;
-    }
-
-    public void setChoicePlayer2(Choice choicePlayer2) {
-        this.choicePlayer2 = choicePlayer2;
-    }
-
-    public void setChoicePlayer1(Choice choicePlayer1) {
-        this.choicePlayer1 = choicePlayer1;
-    }
 }

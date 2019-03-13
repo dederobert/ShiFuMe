@@ -27,12 +27,9 @@ public abstract class Common extends Thread{
     }
 
     public enum MessageHeader {
-        HELLO("hello"),
-        HELLO_SERVERSIDE("hello_serv"),
         INFOS("info "), //info [opp_choice: CHOIX, your_score: SCORE, opp_score: SCORE]
         PLAYER_CHOICE("choice "), //choice [choice: CHOIX]
         END("end");
-
 
         private String message;
         MessageHeader(String message) {
@@ -46,6 +43,9 @@ public abstract class Common extends Thread{
 
         public boolean checkResponse(String response) {
             return (message.startsWith(response));
+        }
+        public String extractInfo(String response) {
+            return response.replace(message+":", "");
         }
     }
 
