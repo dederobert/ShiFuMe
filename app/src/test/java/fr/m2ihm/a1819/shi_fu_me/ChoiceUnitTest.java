@@ -39,4 +39,8 @@ public class ChoiceUnitTest {
         Assert.assertFalse(Choice.CISEAUX.win(Choice.CISEAUX));
     }
 
+    @Test
+    public void randomChoiceNotNull() {
+        Assert.assertNotNull(Choice.randomChoice());
+    }
 }

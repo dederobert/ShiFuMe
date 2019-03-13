@@ -69,11 +69,4 @@ public class GameUnitTest {
         game.updateScore();
         Assert.assertEquals(game.getAdvScore(), 0);
     }
-
-    @Test
-    public void randomChoiceNotNull() {
-        game.randomAdvChoice();
-        Assert.assertNotNull(game.getAdvChoice());
-    }
-
 }

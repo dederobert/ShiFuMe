@@ -13,6 +13,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.m2ihm.a1819.shi_fu_me.models.Choice;
+
 /**
  * Classe représentant le serveur
  * @version 1.0.0
@@ -23,6 +25,10 @@ public class Server extends Common {
      * List des sockets clients
      */
     private List<ServerSideClient> clients = new ArrayList<>();
+    private Choice choicePlayer2;
+    private Choice choicePlayer1;
+
+
 
     /**
      * Créer un serveur
@@ -30,7 +36,7 @@ public class Server extends Common {
      */
     public Server(Context context) {
         super(context);
-        Toast.makeText(context, "Je suis le serveur", Toast.LENGTH_LONG).show();
+        if (context!= null) Toast.makeText(context, "Je suis le serveur", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -49,4 +55,19 @@ public class Server extends Common {
         }
     }
 
+    public Choice getChoicePlayer1() {
+        return choicePlayer1;
+    }
+
+    public Choice getChoicePlayer2() {
+        return choicePlayer2;
+    }
+
+    public void setChoicePlayer2(Choice choicePlayer2) {
+        this.choicePlayer2 = choicePlayer2;
+    }
+
+    public void setChoicePlayer1(Choice choicePlayer1) {
+        this.choicePlayer1 = choicePlayer1;
+    }
 }

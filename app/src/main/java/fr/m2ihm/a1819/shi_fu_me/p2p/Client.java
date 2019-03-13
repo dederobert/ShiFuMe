@@ -12,6 +12,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import fr.m2ihm.a1819.shi_fu_me.models.Choice;
+
 /**
  * Classe utilisé par le client
  */
@@ -23,6 +25,8 @@ public class Client extends Common {
      */
     private InetAddress ownerAddress;
     private boolean running = true;
+    private Choice ownChoice;
+    private Choice opponentChoice;
 
     /**
      * Créer le client
@@ -34,7 +38,7 @@ public class Client extends Common {
         super(context);
         this.ownerAddress = groupOwnerAddress;
         this.runningOnServerSide = runningOnServerSide;
-        Toast.makeText(context, "Je suis le client", Toast.LENGTH_LONG).show();
+        if (context!= null) Toast.makeText(context, "Je suis le client", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -70,5 +74,25 @@ public class Client extends Common {
 
     private InetAddress getOwnerAddress() {
         return ownerAddress;
+    }
+
+    public Choice getOwnChoice() {
+        return ownChoice;
+    }
+
+    public void setOwnChoice(Choice ownChoice) {
+        this.ownChoice = ownChoice;
+    }
+
+    public Choice getOpponentChoice() {
+        return opponentChoice;
+    }
+
+    public void setOpponentChoice(Choice opponentChoice) {
+        this.opponentChoice = opponentChoice;
+    }
+
+    public void sendChoice() {
+        //TODO envoyer son choix au serveur
     }
 }
