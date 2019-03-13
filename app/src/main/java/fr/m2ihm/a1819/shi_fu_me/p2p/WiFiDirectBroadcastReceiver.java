@@ -10,7 +10,7 @@ import android.widget.Toast;
 import fr.m2ihm.a1819.shi_fu_me.activities.InGameActivity;
 import fr.m2ihm.a1819.shi_fu_me.p2p.listeners.ConnectionListener;
 
-public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
+public final class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
 
     private WifiP2pManager mManager;
     private WifiP2pManager.Channel mChannel;

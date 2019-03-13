@@ -10,7 +10,7 @@ import android.widget.ImageView;
  * Classe représentant une {@link AppCompatImageView} qui peut rendre un objet de type {@link AndroidDrawableResource}
  * @version 1.0.0
  */
-public class AndroidImageViewDrawer  implements Drawer<AndroidDrawableResource> {
+public final class AndroidImageViewDrawer  implements Drawer<AndroidDrawableResource> {
 
 
     private final AppCompatImageView imageView;

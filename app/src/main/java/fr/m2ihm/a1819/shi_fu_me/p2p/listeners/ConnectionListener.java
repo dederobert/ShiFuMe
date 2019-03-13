@@ -8,7 +8,7 @@ import fr.m2ihm.a1819.shi_fu_me.activities.InGameActivity;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Client;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
 
-public class ConnectionListener implements WifiP2pManager.ConnectionInfoListener {
+public final class ConnectionListener implements WifiP2pManager.ConnectionInfoListener {
 
     private InGameActivity inGameActivity;
 
@@ -22,9 +22,9 @@ public class ConnectionListener implements WifiP2pManager.ConnectionInfoListener
 
         if (info.groupFormed) {//Si il s'agit d'une connection
             if (!info.isGroupOwner) { //Si on est le client
-                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, false));
+                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, false, new ClientListener(this.inGameActivity.getGame())));
             } else { //Si on est le serveur
-                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, true));
+                inGameActivity.setClient(new Client(inGameActivity, info.groupOwnerAddress, true, new ClientListener(this.inGameActivity.getGame())));
                 inGameActivity.setServer(new Server(inGameActivity));
                 inGameActivity.getServer().start();
             }

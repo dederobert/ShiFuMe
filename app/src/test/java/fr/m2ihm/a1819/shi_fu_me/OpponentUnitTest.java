@@ -15,8 +15,8 @@ public class OpponentUnitTest {
 
     @Before
     public void init() {
-        playerOpponent = OpponentFactory.getOpponent(Game.GameType.MULTIPLAYER);
-        computerOpponent = OpponentFactory.getOpponent(Game.GameType.SINGLEPLAYER);
+        playerOpponent = OpponentFactory.getOpponent(Game.GameType.MULTI_PLAYER);
+        computerOpponent = OpponentFactory.getOpponent(Game.GameType.SINGLE_PLAYER);
     }
 
     @Test

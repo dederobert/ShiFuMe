@@ -9,18 +9,20 @@ import android.support.annotation.NonNull;
 public class Game {
 
     public enum GameType{
-        SINGLEPLAYER,
-        MULTIPLAYER;
+        SINGLE_PLAYER,
+        MULTI_PLAYER
     }
 
     /**
      * Choix de l'utilisateur
      */
+    @NonNull
     private Choice playerChoice = Choice.UNSET;
 
     /**
      * Choix de l'adversaire
      */
+    @NonNull
     private Choice advChoice = Choice.UNSET;
 
     /**

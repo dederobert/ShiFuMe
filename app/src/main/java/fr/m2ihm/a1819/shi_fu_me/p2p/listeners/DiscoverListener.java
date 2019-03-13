@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 
-public class DiscoverListener implements WifiP2pManager.ActionListener {
+public final class DiscoverListener implements WifiP2pManager.ActionListener {
 
     private final Context context;
 

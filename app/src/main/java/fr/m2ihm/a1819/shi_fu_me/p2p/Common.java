@@ -1,6 +1,7 @@
 package fr.m2ihm.a1819.shi_fu_me.p2p;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -26,25 +27,34 @@ public abstract class Common extends Thread{
         this.bufferedReader = bufferedReader;
     }
 
+    public void notifyChange() {}
+
     public enum MessageHeader {
-        INFOS("info "), //info [opp_choice: CHOIX, your_score: SCORE, opp_score: SCORE]
-        PLAYER_CHOICE("choice "), //choice [choice: CHOIX]
+        HELLO_CLIENTSIDE("hello_clt"),
+        HELLO_SERVERSIDE("hello_srv"),
+        SND_PLAYER_CHOICE("snd_choice"), //choice [choice: CHOIX]
+        RCV_PLAYER_CHOICE("rcv_choice"),
+        INFOS("info"), //info [opp_choice: CHOIX, your_score: SCORE, opp_score: SCORE]
         END("end");
 
+        @NonNull
         private String message;
-        MessageHeader(String message) {
+        MessageHeader(@NonNull String message) {
             this.message = message;
         }
 
         @Override
+        @NonNull
         public String toString() {
             return this.message;
         }
 
-        public boolean checkResponse(String response) {
+        public boolean checkResponse(@NonNull String response) {
             return (message.startsWith(response));
         }
-        public String extractInfo(String response) {
+
+        @NonNull
+        public String extractInfo(@NonNull String response) {
             return response.replace(message+":", "");
         }
     }
@@ -52,6 +62,7 @@ public abstract class Common extends Thread{
     /**
      * Le context de l'application
      */
+    @NonNull
     private final Context context;
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
@@ -61,7 +72,7 @@ public abstract class Common extends Thread{
      * Constructeur de la classe
      * @param context Le context de l'application
      */
-    Common(final Context context) {
+    Common(@NonNull final Context context) {
         this.context = context;
     }
 
@@ -69,6 +80,7 @@ public abstract class Common extends Thread{
      * Obtiens le context
      * @return Le context de l'application
      */
+    @NonNull
     public Context getContext() {
         return context;
     }

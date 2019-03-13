@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
@@ -16,7 +17,6 @@ import butterknife.OnClick;
 import fr.m2ihm.a1819.shi_fu_me.R;
 import fr.m2ihm.a1819.shi_fu_me.models.Game;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Client;
-import fr.m2ihm.a1819.shi_fu_me.p2p.Common;
 import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
 import fr.m2ihm.a1819.shi_fu_me.p2p.WiFiDirectBroadcastReceiver;
 import fr.m2ihm.a1819.shi_fu_me.models.Choice;
@@ -31,9 +31,10 @@ import fr.m2ihm.a1819.shi_fu_me.utils.OpponentFactory;
  */
 public class InGameActivity extends AppCompatActivity {
 
-    final Game.GameType GAME_TYPE = Game.GameType.SINGLEPLAYER;
+    final Game.GameType GAME_TYPE = Game.GameType.SINGLE_PLAYER;
 
-    Game game = new Game();
+    @NonNull
+    private Game game = new Game();
     Opponent opponent = OpponentFactory.getOpponent(GAME_TYPE);
 
     AndroidImageViewDrawer imgDrawerPlayer;
@@ -167,5 +168,14 @@ public class InGameActivity extends AppCompatActivity {
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    @NonNull
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(@NonNull Game game) {
+        this.game = game;
     }
 }
