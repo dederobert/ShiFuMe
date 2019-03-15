@@ -32,8 +32,9 @@ public class Server extends Common {
 
     public void resetChoice() {
         synchronized (this) {
-            for (Choice choice : choices)
-                choice = Choice.UNSET;
+            Log.d("[Server]", "Serveur reset choices");
+            choices[0] = Choice.UNSET;
+            choices[1] = Choice.UNSET;
         }
     }
 
