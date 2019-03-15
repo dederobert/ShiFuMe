@@ -1,6 +1,7 @@
 package fr.m2ihm.a1819.shi_fu_me.models;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -32,7 +33,7 @@ public class Game {
 
        toggleButton();
 
-        final Handler handler = new Handler();
+        final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
