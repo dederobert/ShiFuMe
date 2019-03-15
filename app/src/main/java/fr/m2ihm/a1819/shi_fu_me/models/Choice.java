@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public enum Choice {
 
-    UNSET (new AndroidDrawableResource(R.drawable.ciseaux)),
+    UNSET (new AndroidDrawableResource(R.drawable.hourglass)),
     PIERRE(new AndroidDrawableResource(R.drawable.pierre)),
     FEUILLE(new AndroidDrawableResource(R.drawable.feuille)),
     CISEAUX(new AndroidDrawableResource(R.drawable.ciseaux));
