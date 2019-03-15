@@ -21,12 +21,18 @@ public class Game {
         enable = !enable;
         inGameActivity.btn_ciseaux.setClickable(enable);
         inGameActivity.btn_ciseaux.setEnabled(enable);
+        if (!enable) inGameActivity.btn_ciseaux.setAlpha(0.3f);
+        else inGameActivity.btn_ciseaux.setAlpha(1f);
 
         inGameActivity.btn_pierre.setClickable(enable);
         inGameActivity.btn_pierre.setEnabled(enable);
+        if (!enable) inGameActivity.btn_pierre.setAlpha(0.3f);
+        else inGameActivity.btn_pierre.setAlpha(1f);
 
         inGameActivity.btn_feuille.setClickable(enable);
         inGameActivity.btn_feuille.setEnabled(enable);
+        if (!enable) inGameActivity.btn_feuille.setAlpha(0.3f);
+        else inGameActivity.btn_feuille.setAlpha(1f);
     }
 
     public void resetChoice() {
