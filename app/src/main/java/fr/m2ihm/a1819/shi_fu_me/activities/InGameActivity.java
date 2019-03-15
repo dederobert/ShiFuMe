@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -54,6 +55,15 @@ public class InGameActivity extends AppCompatActivity {
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.txt_adv_score)
     TextView txt_adv_score;
+
+    @BindView(R.id.btn_ciseaux)
+    public ImageButton btn_ciseaux;
+
+    @BindView(R.id.btn_pierre)
+    public ImageButton btn_pierre;
+
+    @BindView(R.id.btn_feuille)
+    public ImageButton btn_feuille;
 
     private WiFiDirectBroadcastReceiver receiver;
     private IntentFilter intentFilter;

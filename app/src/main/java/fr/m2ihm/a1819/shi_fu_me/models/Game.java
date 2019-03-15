@@ -1,5 +1,6 @@
 package fr.m2ihm.a1819.shi_fu_me.models;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -12,6 +13,35 @@ import fr.m2ihm.a1819.shi_fu_me.p2p.Server;
  * @version 1.0.0
  */
 public class Game {
+
+    private boolean enable = true;
+
+    private void toggleButton() {
+        enable = !enable;
+        inGameActivity.btn_ciseaux.setClickable(enable);
+        inGameActivity.btn_ciseaux.setEnabled(enable);
+
+        inGameActivity.btn_pierre.setClickable(enable);
+        inGameActivity.btn_pierre.setEnabled(enable);
+
+        inGameActivity.btn_feuille.setClickable(enable);
+        inGameActivity.btn_feuille.setEnabled(enable);
+    }
+
+    public void resetChoice() {
+
+       toggleButton();
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                playerChoice = Choice.UNSET;
+                advChoice = Choice.UNSET;
+                toggleButton();
+            }
+        }, 2000);
+    }
 
     public enum GameType{
         SINGLE_PLAYER,

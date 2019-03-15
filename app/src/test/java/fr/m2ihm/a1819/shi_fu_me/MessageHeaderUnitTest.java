@@ -18,7 +18,6 @@ public class MessageHeaderUnitTest {
 
         Assert.assertFalse(Common.MessageHeader.RCV_PLAYER_CHOICE.checkResponse(message));
         Assert.assertFalse(Common.MessageHeader.END.checkResponse(message));
-        Assert.assertFalse(Common.MessageHeader.RESET.checkResponse(message));
     }
 
 
@@ -30,7 +29,6 @@ public class MessageHeaderUnitTest {
 
         Assert.assertFalse(Common.MessageHeader.SND_PLAYER_CHOICE.checkResponse(message));
         Assert.assertFalse(Common.MessageHeader.END.checkResponse(message));
-        Assert.assertFalse(Common.MessageHeader.RESET.checkResponse(message));
     }
 
     @Test
@@ -41,7 +39,6 @@ public class MessageHeaderUnitTest {
 
         Assert.assertFalse(Common.MessageHeader.SND_PLAYER_CHOICE.checkResponse(message));
         Assert.assertFalse(Common.MessageHeader.RCV_PLAYER_CHOICE.checkResponse(message));
-        Assert.assertFalse(Common.MessageHeader.RESET.checkResponse(message));
     }
 
     @Test

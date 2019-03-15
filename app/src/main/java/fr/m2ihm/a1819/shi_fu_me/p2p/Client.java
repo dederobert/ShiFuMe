@@ -60,7 +60,8 @@ public class Client extends Common {
             socket.connect(new InetSocketAddress(getOwnerAddress(), 8888));
             this.setPrintWriter(new PrintWriter(socket.getOutputStream(), true));
             this.setBufferedReader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
-            Log.d("[Client]", "Connecté !");
+            Log.d("[Client]", "Connecté à " + socket.getInetAddress());
+            Log.d("[Client]", "Adresse client " + socket.getLocalAddress());
 
             while (running && !socket.isClosed()) {
                 synchronized (lockOwnChoice) {

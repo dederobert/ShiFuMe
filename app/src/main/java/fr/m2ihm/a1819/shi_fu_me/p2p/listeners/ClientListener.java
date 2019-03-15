@@ -19,5 +19,6 @@ public class ClientListener implements ClientCallBack {
             game.setAdvChoice(choice);
             game.updateScore();
             game.getInGameActivity().updateUi();
+            game.resetChoice();
     }
 }
