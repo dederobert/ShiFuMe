@@ -62,9 +62,10 @@ public class Client extends Common {
             this.setBufferedReader(new BufferedReader(new InputStreamReader(socket.getInputStream())));
             Log.d("[Client]", "Connecté !");
 
-            while (running) {
+            while (running && !socket.isClosed()) {
                 synchronized (lockOwnChoice) {
                     while (getOwnChoice().equals(Choice.UNSET)) lockOwnChoice.wait();
+                    Log.d("[Client]", "Choix envoyé");
                     this.getPrintWriter().println(MessageHeader.SND_PLAYER_CHOICE + ":" + getOwnChoice()); //Envoie notre choix
                 }
 
@@ -77,6 +78,7 @@ public class Client extends Common {
                     resetChoice();
                 }
             }
+            Log.d("[Client]", "Connection fermée ");
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

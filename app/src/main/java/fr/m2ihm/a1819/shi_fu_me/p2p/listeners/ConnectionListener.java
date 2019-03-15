@@ -23,6 +23,7 @@ public final class ConnectionListener implements WifiP2pManager.ConnectionInfoLi
 
         if (info.groupFormed) {//Si il s'agit d'une connection
             if (!info.isGroupOwner) { //Si on est le client
+                Log.d("[Client]", info.groupOwnerAddress.toString());
                 inGameActivity.getGame().setClient(new Client(inGameActivity, info.groupOwnerAddress, new ClientListener(this.inGameActivity.getGame()), inGameActivity.getGame()));
             } else { //Si on est le serveur
                 Log.d("[server]", info.groupOwnerAddress.toString());
