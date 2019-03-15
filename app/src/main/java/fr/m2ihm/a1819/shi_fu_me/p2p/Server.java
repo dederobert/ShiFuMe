@@ -57,16 +57,21 @@ public class Server extends Common {
             ServerSocket serverSocket = new ServerSocket(8888);
             int i = 0;
             Socket socket;
+
+            Log.d("[Server]", "Attente connection");
             while ((socket = serverSocket.accept()) != null) {
                 if (i < 2) { //On accepte que deux connection
                     Log.d("[Server]", "Client connecté de "+socket.getInetAddress().toString());
                     clients[i] = new ServerSideClient(i, getContext(), socket, serverSideClientCallBack, getGame());
                     choices[i] = Choice.UNSET;
                     locks[i] = new Object();
-                    clients[i++].run();
+                    clients[i++].start();
+                    Log.d("[Server]", "Client run");
                 }else
                     socket.close();
+                Log.d("[Server]", "Attente connection");
             }
+            Log.d("[Server]", "Serveur fermée");
         } catch (IOException e) {
             e.printStackTrace();
         }

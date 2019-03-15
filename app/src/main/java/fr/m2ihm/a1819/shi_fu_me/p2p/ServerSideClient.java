@@ -41,6 +41,7 @@ public class ServerSideClient extends Common {
 
     @Override
     public void run() {
+        Log.d("[Server_F]", "running ...");
         super.run();
         try {
             this.setPrintWriter(new PrintWriter(socket.getOutputStream(), true));
