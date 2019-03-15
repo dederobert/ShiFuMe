@@ -2,6 +2,7 @@ package fr.m2ihm.a1819.shi_fu_me.p2p;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -51,10 +52,12 @@ public class ServerSideClient extends Common {
 
                 if (MessageHeader.END.checkResponse(response)) { running = false; continue; } //Check si on recoit fin de connection
                 if (MessageHeader.RESET.checkResponse(response)) {
+                    Log.d("[Server_F]", "Reset");
                     resetChoice();
                     continue;
                 }
                 if (MessageHeader.SND_PLAYER_CHOICE.checkResponse(response)) {
+                    Log.d("[Server_F]", "Choix reçut");
                     ownChoice = Choice.valueOf(MessageHeader.SND_PLAYER_CHOICE.extractInfo(response));
                     serverSideClientCallBack.onReceivePlayerChoice(ownChoice, getIndex());
                 }

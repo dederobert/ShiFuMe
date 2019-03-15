@@ -27,7 +27,7 @@ public class Server extends Common {
     private final ServerSideClient[] clients = new ServerSideClient[2];
     private final ServerSideClientCallBack serverSideClientCallBack;
 
-    private final Choice[] choices = new Choice[2];
+    private final Choice[] choices = {Choice.UNSET, Choice.UNSET};
     private final Object[] locks = new Object[2];
 
     public void resetChoice() {
@@ -59,7 +59,7 @@ public class Server extends Common {
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
                 if (i < 2) { //On accepte que deux connection
-                    Log.d("[Server]", "Client connecté");
+                    Log.d("[Server]", "Client connecté de "+socket.getInetAddress().toString());
                     clients[i] = new ServerSideClient(i, getContext(), socket, serverSideClientCallBack, getGame());
                     choices[i] = Choice.UNSET;
                     locks[i] = new Object();
