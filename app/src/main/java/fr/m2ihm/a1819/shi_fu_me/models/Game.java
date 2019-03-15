@@ -40,6 +40,7 @@ public class Game {
                 playerChoice = Choice.UNSET;
                 advChoice = Choice.UNSET;
                 toggleButton();
+                inGameActivity.updateUi();
             }
         }, 2000);
     }
