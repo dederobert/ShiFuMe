@@ -30,9 +30,6 @@ public class Game {
     }
 
     public void resetChoice() {
-
-       toggleButton();
-
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -116,6 +113,7 @@ public class Game {
      * @param playerChoice Choix du joueur
      */
     public void setPlayerChoice(@NonNull Choice playerChoice) {
+        toggleButton();
         if (client != null)
             client.setOwnChoice(playerChoice);
         this.playerChoice = playerChoice;
