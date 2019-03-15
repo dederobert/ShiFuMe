@@ -13,7 +13,7 @@ public class GameUnitTest {
 
     @Before
     public void init() {
-        game = new Game(this);
+        game = new Game(null);
     }
 
     @Test

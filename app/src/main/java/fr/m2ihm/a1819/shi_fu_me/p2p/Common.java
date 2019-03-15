@@ -55,12 +55,12 @@ public abstract class Common extends Thread{
             return this.message;
         }
 
-        boolean checkResponse(@NonNull String response) {
-            return (message.startsWith(response));
+        public boolean checkResponse(@NonNull String response) {
+            return (response.startsWith(message));
         }
 
         @NonNull
-        String extractInfo(@NonNull String response) {
+        public String extractInfo(@NonNull String response) {
             return response.replace(message+":", "");
         }
     }
