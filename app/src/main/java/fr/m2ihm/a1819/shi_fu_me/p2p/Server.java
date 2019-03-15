@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,15 +24,17 @@ public class Server extends Common {
     /**
      * List des sockets clients
      */
-    private final List<ServerSideClient> clients = new ArrayList<>();
+    private final ServerSideClient[] clients = new ServerSideClient[2];
     private final ServerSideClientCallBack serverSideClientCallBack;
 
-    private final List<Choice> choices = new ArrayList<>();
-    private final List<Object> locks = new ArrayList<>();
+    private final Choice[] choices = new Choice[2];
+    private final Object[] locks = new Object[2];
 
-    private void resetChoice() {
-        for(Choice choice: choices)
-            choice = Choice.UNSET;
+    public void resetChoice() {
+        synchronized (this) {
+            for (Choice choice : choices)
+                choice = Choice.UNSET;
+        }
     }
 
     /**
@@ -53,11 +56,16 @@ public class Server extends Common {
             Log.d("[Server]", "Création serveur");
             ServerSocket serverSocket = new ServerSocket(8888);
             int i = 0;
-            while (clients.add(new ServerSideClient(i, getContext(), serverSocket.accept(), serverSideClientCallBack, getGame()))) {
-                Log.d("[Server]", "Client connecté");
-                choices.add(Choice.UNSET);
-                locks.add(new Object());
-                clients.get(i++).run();
+            Socket socket;
+            while ((socket = serverSocket.accept()) != null) {
+                if (i < 2) { //On accepte que deux connection
+                    Log.d("[Server]", "Client connecté");
+                    clients[i] = new ServerSideClient(i, getContext(), socket, serverSideClientCallBack, getGame());
+                    choices[i] = Choice.UNSET;
+                    locks[i] = new Object();
+                    clients[i++].run();
+                }else
+                    socket.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,17 +73,34 @@ public class Server extends Common {
     }
 
     public Choice getChoice(int index) {
-        return choices.get(index);
-    }
-
-    public void setChoice(Choice choice, int index) {
-        synchronized (locks.get(index)) {
-            this.choices.set(index, choice);
-            locks.get(index).notify();
+        synchronized (this) {
+            return choices[index];
         }
     }
 
-    public List<ServerSideClient> getClients() {
+    public void setChoice(Choice choice, int index) {
+        synchronized (this) {
+            synchronized (locks[index]) {
+                this.choices[index] = choice;
+                locks[index].notify();
+            }
+        }
+    }
+
+    public boolean allChoiceIsSet() {
+        synchronized (this) {
+            for (Choice choice : choices) {
+                if (choice.equals(Choice.UNSET)) return false;
+            }
+            return true;
+        }
+    }
+
+    public ServerSideClient[] getClients() {
         return clients;
+    }
+
+    public ServerSideClient getClient(int i) {
+        return clients[i];
     }
 }

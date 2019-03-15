@@ -40,7 +40,8 @@ public abstract class Common extends Thread{
     public enum MessageHeader {
         SND_PLAYER_CHOICE("snd_choice"), //choice [choice: CHOIX]
         RCV_PLAYER_CHOICE("rcv_choice"),
-        END("end");
+        END("end"),
+        RESET("reset");
 
         @NonNull
         private final String message;

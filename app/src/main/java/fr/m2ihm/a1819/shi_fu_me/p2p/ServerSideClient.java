@@ -50,6 +50,10 @@ public class ServerSideClient extends Common {
                 response = this.getBufferedReader().readLine(); //On recoit le choix du client
 
                 if (MessageHeader.END.checkResponse(response)) { running = false; continue; } //Check si on recoit fin de connection
+                if (MessageHeader.RESET.checkResponse(response)) {
+                    resetChoice();
+                    continue;
+                }
                 if (MessageHeader.SND_PLAYER_CHOICE.checkResponse(response)) {
                     ownChoice = Choice.valueOf(MessageHeader.SND_PLAYER_CHOICE.extractInfo(response));
                     serverSideClientCallBack.onReceivePlayerChoice(ownChoice, getIndex());
@@ -59,7 +63,6 @@ public class ServerSideClient extends Common {
                     while (getOpponentChoice().equals(Choice.UNSET)) { lockOppChoice.wait(); } // Tant que l'on n'a pas de choix on attend
                     this.getPrintWriter().println(MessageHeader.RCV_PLAYER_CHOICE + ":" + getOpponentChoice()); //On envoie le message
                 }
-                resetChoice();
             } while (running);
 
         } catch (IOException | InterruptedException e) {

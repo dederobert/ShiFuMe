@@ -18,11 +18,12 @@ public final class ServerSideClientListener implements ServerSideClientCallBack 
        //Set the choice on server
         server.setChoice(choice, clientIndex);
 
-        //Set opp choice for all other client
-        int i = 0;
-        for (ServerSideClient client: server.getClients()) {
-            if (i++ != clientIndex)
-                client.setOpponentChoice(choice);
+        if (server.allChoiceIsSet()){
+            //Set opp choice for all other client
+            server.getClient(0).setOpponentChoice(server.getChoice(1));
+            server.getClient(1).setOpponentChoice(server.getChoice(0));
+            server.resetChoice();
         }
+
     }
 }
