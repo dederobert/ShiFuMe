@@ -2,6 +2,7 @@ package fr.m2ihm.a1819.shi_fu_me.p2p.listeners;
 
 import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.util.Log;
 
 
 import fr.m2ihm.a1819.shi_fu_me.activities.InGameActivity;
@@ -22,6 +23,7 @@ public final class ConnectionListener implements WifiP2pManager.ConnectionInfoLi
 
         if (info.groupFormed) {//Si il s'agit d'une connection
             if (!info.isGroupOwner) { //Si on est le client
+                Log.d("[Client]", info.groupOwnerAddress.toString());
                 inGameActivity.getGame().setClient(new Client(inGameActivity, info.groupOwnerAddress, new ClientListener(this.inGameActivity.getGame()), inGameActivity.getGame()));
             } else { //Si on est le serveur
                 inGameActivity.getGame().setClient(new Client(inGameActivity, info.groupOwnerAddress, new ClientListener(this.inGameActivity.getGame()), inGameActivity.getGame()));
